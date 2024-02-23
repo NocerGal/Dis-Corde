@@ -1,7 +1,6 @@
-import { LogoutButton } from '@/app/AuthButton';
-import { auth } from '../lib/auth';
+import { auth } from '../../lib/auth';
 import { LoginButton } from './LoginButton';
-import { PropsWithoutRef } from 'react';
+import { LogoutButton } from './LogoutButton';
 
 export type AuthProps = {};
 

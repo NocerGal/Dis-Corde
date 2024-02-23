@@ -7,7 +7,7 @@ import { signOut } from 'next-auth/react';
 
 export type LoginButtonProps = {};
 
-export const LoginButton = (props: LoginButtonProps) => {
+export const LogoutButton = (props: LoginButtonProps) => {
   const mutation = useMutation({ mutationFn: async () => signOut() });
 
   return (
