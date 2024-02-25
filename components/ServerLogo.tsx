@@ -1,19 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import React, { ReactComponentElement } from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 
 export type ServerLogoProps = {
   image?: string;
   isNotification?: boolean;
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const ServerLogo = ({ image, isNotification }: ServerLogoProps) => {
+export const ServerLogo = ({
+  isNotification,
+  image,
+  ...rest
+}: ServerLogoProps) => {
   return (
-    <div className="group justify-center w-[72px] hover:cursor-pointer transition-all active:translate-y-[2px]">
+    <button
+      {...rest}
+      className="group justify-center w-[72px] hover:cursor-pointer transition-all "
+    >
       <div className="flex justify-center flex-row-reverse">
         <img
-          className="h-12 border rounded-[50px] transition-all group-hover:rounded-[16px] group-focus:rounded-[16px] "
+          className="h-12 border rounded-[50px] transition-all group-hover:rounded-[16px] group-focus:rounded-[16px] group-active:translate-y-[2px]"
           src={image}
           alt="server logo"
         />
@@ -27,23 +34,37 @@ export const ServerLogo = ({ image, isNotification }: ServerLogoProps) => {
           </div>
         )}
       </div>
-    </div>
+    </button>
   );
 };
 
 export type ServerLogoIconProps = {
   isNotification?: boolean;
+  isSideBottomBar?: boolean;
   children: React.ReactNode;
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const ServerLogoIcon = ({
   isNotification,
   children,
+  isSideBottomBar,
+  ...rest
 }: ServerLogoIconProps) => {
   return (
-    <div className="group justify-center w-[72px] hover:cursor-pointer transition-all active:translate-y-[2px]">
-      <div className="flex justify-center flex-row-reverse">
-        {children}
+    <button
+      {...rest}
+      className="group justify-center w-[72px] hover:cursor-pointer transition-all"
+    >
+      <div className="flex justify-center flex-row-reverse rounded-[50px]">
+        <div className="relative h-12 w-12 border rounded-[50px] transition-all group-hover:rounded-[16px] group-focus:rounded-[16px]  group-active:translate-y-[2px]">
+          <div className="absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 ">
+            {children}
+          </div>
+
+          {isSideBottomBar && (
+            <div className="absolute -bottom-[10px] left-1/2 -translate-x-1/2 bg-white h-[2px] w-8 rounded-full"></div>
+          )}
+        </div>
         {isNotification && (
           <div className="relative max-w-full">
             <div className="relative top-[50%] left-[-12px]">
@@ -53,6 +74,6 @@ export const ServerLogoIcon = ({
           </div>
         )}
       </div>
-    </div>
+    </button>
   );
 };
